@@ -39,12 +39,13 @@ function getShapeInternal(
 
   // Handle functions
   if (primitiveType === "function") {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type -- Runtime type check
     const funcName = (data as Function).name;
-    return funcName ? `Function(${funcName})` : "Function";
+    return funcName.length > 0 ? `Function(${funcName})` : "Function";
   }
 
   // Check for circular references
-  if (typeof data === "object" && data !== null) {
+  if (typeof data === "object") {
     if (visited.has(data)) {
       return "[Circular]";
     }
@@ -131,7 +132,7 @@ function getShapeInternal(
 
   // Handle plain objects
   if (objectType === "[object Object]") {
-    const result: { [key: string]: ShapeResult } = {};
+    const result: Record<string, ShapeResult> = {};
     for (const key in data) {
       if (Object.prototype.hasOwnProperty.call(data, key)) {
         result[key] = getShapeInternal(
