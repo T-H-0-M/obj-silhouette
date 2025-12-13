@@ -1,6 +1,6 @@
 {
   "name": "obj-silhouette",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A lightweight TypeScript utility to debug massive objects by logging their shape rather than raw content",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
